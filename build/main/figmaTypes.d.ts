@@ -777,9 +777,11 @@ export interface FileSummary {
     readonly last_modified: string;
 }
 export interface TeamProjectsResponse {
+    readonly name: string;
     readonly projects: ReadonlyArray<ProjectSummary>;
 }
 export interface ProjectFilesResponse {
+    readonly name: string;
     readonly files: ReadonlyArray<FileSummary>;
 }
 interface PaginationResponse {
