@@ -793,7 +793,13 @@ interface PaginationResponse {
 export interface TeamComponentsResponse extends PaginationResponse {
     readonly components: ReadonlyArray<FullComponentMetadata>;
 }
+export interface FileComponentsResponse extends PaginationResponse {
+    readonly components: ReadonlyArray<FullComponentMetadata>;
+}
 export interface TeamStylesResponse extends PaginationResponse {
+    readonly styles: ReadonlyArray<FullStyleMetadata>;
+}
+export interface FileStylesResponse extends PaginationResponse {
     readonly styles: ReadonlyArray<FullStyleMetadata>;
 }
 export {};

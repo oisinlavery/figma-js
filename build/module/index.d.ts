@@ -153,11 +153,18 @@ export interface ClientInterface {
     readonly comments: (fileId: string) => AxiosPromise<Figma.CommentsResponse>;
     /**
      * Posts a new comment on the file.
-     * @param {fileId} String File to get comments from
+     * @param {fileId} String File to post comment to
      * @param {params} PostCommentParams
      * @see https://www.figma.com/developers/api#post-comments-endpoint
      */
     readonly postComment: (fileId: string, params: PostCommentParams) => AxiosPromise<Figma.Comment>;
+    /**
+     * Delete a comment from the file
+     * @param {fileId} String File to delete comment from
+     * @param {commentId} String id of the comment to be deleted
+     * @see https://www.figma.com/developers/api#delete-comments-endpoint
+     */
+    readonly deleteComment: (fileId: string, commentId: string) => AxiosPromise<Figma.Comment>;
     /**
      * Get user information for the authenticated user.
      * @see https://www.figma.com/developers/api#get-me-endpoint
@@ -186,6 +193,12 @@ export interface ClientInterface {
      */
     readonly teamComponents: (teamId: string, params?: PaginationParams) => AxiosPromise<Figma.TeamComponentsResponse>;
     /**
+     * Get a paginated list of published components within a file
+     * @param {fileId} String Id of the file to list components from
+     * @see https://www.figma.com/developers/api#get-file-components-endpoint
+     */
+    readonly fileComponents: (fileId: string, params?: PaginationParams) => AxiosPromise<Figma.FileComponentsResponse>;
+    /**
      * Get metadata on a component by key.
      * @param {key} The unique identifier of the component.
      * @see https://www.figma.com/developers/api#get-component-endpoint
@@ -193,10 +206,16 @@ export interface ClientInterface {
     readonly component: (key: string) => AxiosPromise<Figma.ComponentResponse>;
     /**
      * Get a paginated list of published styles within a team library
-     * @param {teamId} String Id of the team to list components from
+     * @param {teamId} String Id of the team to list styles from
      * @see https://www.figma.com/developers/api#get-team-styles-endpoint
      */
     readonly teamStyles: (teamId: string, params?: PaginationParams) => AxiosPromise<Figma.TeamStylesResponse>;
+    /**
+     * Get a paginated list of published styles within a file
+     * @param {fileId} String Id of the file to list styles from
+     * @see https://www.figma.com/developers/api#get-file-styles-endpoint
+     */
+    readonly fileStyles: (fileId: string, params?: PaginationParams) => AxiosPromise<Figma.FileStylesResponse>;
     /**
      * Get metadata on a style by key.
      * @param {key} The unique identifier of the style.
