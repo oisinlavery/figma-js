@@ -48,7 +48,7 @@ export declare type Node = Document | Canvas | Frame | Group | Vector | BooleanG
 export interface Document extends Global {
     readonly type: 'DOCUMENT';
     /** An array of canvases attached to the document */
-    readonly children: ReadonlyArray<Node>;
+    readonly children: ReadonlyArray<Canvas>;
 }
 /** Represents a single page */
 export interface Canvas extends Global {
