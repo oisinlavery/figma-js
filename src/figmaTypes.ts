@@ -126,7 +126,7 @@ export type Node =
 export interface Document extends Global {
   readonly type: 'DOCUMENT';
   /** An array of canvases attached to the document */
-  readonly children: ReadonlyArray<Node>;
+  readonly children: ReadonlyArray<Canvas>;
 }
 
 /** Represents a single page */
