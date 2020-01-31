@@ -608,7 +608,7 @@ interface SharedElement extends ComponentMetadata {
     /** Id of the component node within the figma file */
     readonly node_id: string;
     /** URL link to the element's thumbnail image */
-    readonly thumbnail_urlString: string;
+    readonly thumbnail_url: string;
     /** The UTC ISO 8601 time at which the element was created */
     readonly created_at: string;
     /** The UTC ISO 8601 time at which the element was updated */
@@ -686,10 +686,6 @@ export interface FrameOffset {
     /** 2d vector offset within the frame */
     readonly node_offset: Vector2;
 }
-export interface ProjectSummary {
-    readonly id: string;
-    readonly name: string;
-}
 export interface FileResponse {
     readonly components: {
         readonly [key: string]: ComponentMetadata;
@@ -741,34 +737,32 @@ export interface FileVersionsResponse {
 }
 export interface FileImageResponse {
     readonly err: string | null;
+    readonly status: number | undefined;
     readonly images: {
-        readonly [key: string]: string;
+        readonly [id: string]: string | null;
     };
 }
-export interface FileImageFillsResponse {
-    readonly error: boolean;
-    readonly status: number;
+export interface FileImageFillsResponse extends StatusResponse {
     readonly meta: {
         readonly images: {
-            readonly [key: string]: string;
+            readonly [imageRef: string]: string;
         };
     };
 }
 export interface CommentsResponse {
     readonly comments: ReadonlyArray<Comment>;
 }
-export interface ComponentResponse {
-    readonly err: string | null;
-    readonly status: number;
-    readonly meta: {
-        readonly [key: string]: FullComponentMetadata;
-    };
+export interface TeamProjectsResponse {
+    readonly name: string;
+    readonly projects: ReadonlyArray<ProjectSummary>;
 }
-export interface StyleResponse {
-    readonly err: string | null;
-    readonly meta: {
-        readonly [key: string]: FullStyleMetadata;
-    };
+export interface ProjectSummary {
+    readonly id: string;
+    readonly name: string;
+}
+export interface ProjectFilesResponse {
+    readonly name: string;
+    readonly files: ReadonlyArray<FileSummary>;
 }
 export interface FileSummary {
     readonly key: string;
@@ -776,30 +770,40 @@ export interface FileSummary {
     readonly thumbnail_url: string;
     readonly last_modified: string;
 }
-export interface TeamProjectsResponse {
-    readonly name: string;
-    readonly projects: ReadonlyArray<ProjectSummary>;
-}
-export interface ProjectFilesResponse {
-    readonly name: string;
-    readonly files: ReadonlyArray<FileSummary>;
-}
-interface PaginationResponse {
+export interface PaginationResponse {
     readonly cursor: {
         readonly before: number;
         readonly after: number;
     };
 }
-export interface TeamComponentsResponse extends PaginationResponse {
-    readonly components: ReadonlyArray<FullComponentMetadata>;
+export interface StatusResponse {
+    readonly error: string | false;
+    readonly status: number;
 }
-export interface FileComponentsResponse extends ComponentResponse {
-    readonly components: ReadonlyArray<FullComponentMetadata>;
+export interface ComponentResponse extends StatusResponse {
+    readonly meta: FullComponentMetadata;
 }
-export interface TeamStylesResponse extends PaginationResponse {
-    readonly styles: ReadonlyArray<FullStyleMetadata>;
+export interface TeamComponentsResponse extends StatusResponse {
+    readonly meta: PaginationResponse & {
+        readonly components: ReadonlyArray<FullComponentMetadata>;
+    };
 }
-export interface FileStylesResponse extends ComponentResponse {
-    readonly styles: ReadonlyArray<FullStyleMetadata>;
+export interface FileComponentsResponse extends StatusResponse {
+    readonly meta: {
+        readonly components: ReadonlyArray<FullComponentMetadata>;
+    };
+}
+export interface StyleResponse extends StatusResponse {
+    readonly meta: FullStyleMetadata;
+}
+export interface TeamStylesResponse extends StatusResponse {
+    readonly meta: PaginationResponse & {
+        readonly styles: ReadonlyArray<FullStyleMetadata>;
+    };
+}
+export interface FileStylesResponse extends StatusResponse {
+    readonly meta: {
+        readonly styles: ReadonlyArray<FullStyleMetadata>;
+    };
 }
 export {};
