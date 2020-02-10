@@ -212,7 +212,10 @@ export interface FrameBase extends Global {
   readonly clipsContent: boolean;
 
   /** overflow direction for scrollable areas in a prototype */
-  readonly overflowDirection?: 'HORIZONTAL' | 'VERTICAL' | 'BOTH';
+  readonly overflowDirection?:
+    | 'HORIZONTAL_SCROLLING'
+    | 'VERTICAL_SCROLLING'
+    | 'HORIZONTAL_AND_VERTICAL_SCROLLING';
 
   /**
    * An array of layout grids attached to this node (see layout grids section
