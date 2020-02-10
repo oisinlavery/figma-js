@@ -145,14 +145,17 @@ export interface Canvas extends Global {
 export interface FrameBase extends Global {
   /** An array of nodes that are direct children of this node */
   readonly children: ReadonlyArray<Node>;
-  /** Backgrounds on the node */
+  /** [DEPRECATED] Background of the node. This is deprecated, as backgrounds for frames are now in the fills field. */
   readonly background: ReadonlyArray<Paint>;
-  /** Background color of the node. This is deprecated, as frames now support more than a solid color as a background. Please use the background field instead. */
+  /** [DEPRECATED] Background color of the node. This is deprecated, as frames now support more than a solid color as a background. Please use the fills field instead. */
   readonly backgroundColor: Color;
+  /** An array of fill paints applied to the node */
+  readonly fills: ReadonlyArray<Paint>;
   /**
    * An array of export settings representing images to export from node
    * @default []
    */
+
   readonly exportSettings?: ReadonlyArray<ExportSetting>;
   /**
    * How this node blends with nodes behind it in the scene
