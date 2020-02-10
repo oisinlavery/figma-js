@@ -65,10 +65,12 @@ export interface Canvas extends Global {
 export interface FrameBase extends Global {
     /** An array of nodes that are direct children of this node */
     readonly children: ReadonlyArray<Node>;
-    /** Backgrounds on the node */
+    /** [DEPRECATED] Background of the node. This is deprecated, as backgrounds for frames are now in the fills field. */
     readonly background: ReadonlyArray<Paint>;
-    /** Background color of the node. This is deprecated, as frames now support more than a solid color as a background. Please use the background field instead. */
+    /** [DEPRECATED] Background color of the node. This is deprecated, as frames now support more than a solid color as a background. Please use the fills field instead. */
     readonly backgroundColor: Color;
+    /** An array of fill paints applied to the node */
+    readonly fills: ReadonlyArray<Paint>;
     /**
      * An array of export settings representing images to export from node
      * @default []
@@ -124,6 +126,8 @@ export interface FrameBase extends Global {
     readonly relativeTransform?: Transform;
     /** Does this node clip content outside of its bounds? */
     readonly clipsContent: boolean;
+    /** overflow direction for scrollable areas in a prototype */
+    readonly overflowDirection?: 'HORIZONTAL' | 'VERTICAL' | 'BOTH';
     /**
      * An array of layout grids attached to this node (see layout grids section
      * for more details). GROUP nodes do not have this attribute
