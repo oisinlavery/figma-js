@@ -210,6 +210,10 @@ export interface FrameBase extends Global {
 
   /** Does this node clip content outside of its bounds? */
   readonly clipsContent: boolean;
+
+  /** overflow direction for scrollable areas in a prototype */
+  readonly overflowDirection?: 'HORIZONTAL' | 'VERTICAL' | 'BOTH';
+
   /**
    * An array of layout grids attached to this node (see layout grids section
    * for more details). GROUP nodes do not have this attribute
