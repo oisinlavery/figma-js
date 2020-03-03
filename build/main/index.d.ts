@@ -33,6 +33,11 @@ export interface FileNodesParams {
      * Set to "paths" to export vector data
      */
     readonly geometry?: string;
+    /**
+     * A comma separated list of plugin IDs and/or the string "shared".
+     * Any data present in the document written by those plugins will be included in the result in the `pluginData` and `sharedPluginData` properties.
+     */
+    readonly plugin_data?: string;
 }
 export declare type exportFormatOptions = 'jpg' | 'png' | 'svg' | 'pdf';
 export interface FileImageParams {
@@ -105,7 +110,7 @@ export interface ClientInterface {
      * @param {fileId} String File to get version history from
      * @see https://www.figma.com/developers/api#get-file-versions-endpoint
      */
-    readonly fileVersions: (fileId: string, ids: ReadonlyArray<string>, params?: FileNodesParams) => AxiosPromise<Figma.FileVersionsResponse>;
+    readonly fileVersions: (fileId: string, ids: ReadonlyArray<string>) => AxiosPromise<Figma.FileVersionsResponse>;
     /**
      * Returns the nodes referenced to by :ids as a JSON object.
      * The nodes are retrieved from the Figma file referenced to by :key.
